@@ -29,6 +29,8 @@ namespace PowerShell_Studio_Free
     ///
     public partial class MainWindow : Window
     {
+        private OpenFileDialog fileDialog = new OpenFileDialog();
+        private Point position;
         public int Radius = 10;
         public class MyCompletionData : ICompletionData
         {
@@ -66,8 +68,7 @@ namespace PowerShell_Studio_Free
             }
 
         }
-        private OpenFileDialog fileDialog = new OpenFileDialog();
-
+       
         public MainWindow()
         {
             InitializeComponent();
@@ -147,6 +148,25 @@ namespace PowerShell_Studio_Free
         }
 
         private void NewProject_Click(object sender, RoutedEventArgs e)
+        {
+            NewProjectWindow newWindow = new NewProjectWindow();
+            newWindow.ShowDialog();
+        }
+
+        private void Top_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            position = e.GetPosition(this);
+        }
+
+        private void Top_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                WindowMain.Top = WindowMain.Top + (position.X - e.GetPosition(this).X);
+                WindowMain.Left = WindowMain.Left + (position.Y - e.GetPosition(this).Y);
+            }
+        }
+        private void Top_MouseUp(object sender, MouseButtonEventArgs e)
         {
 
         }

@@ -6,10 +6,10 @@
         xmlns:local="clr-namespace:PowerShell_Studio_Free"
         xmlns:avalonedit="http://icsharpcode.net/sharpdevelop/avalonedit"
         mc:Ignorable="d"
-        Title="PowerShellIDE" Height="878.5" Width="1502" WindowStyle="None" AllowsTransparency="True" BorderThickness="5" Background="Transparent" WindowStartupLocation="CenterScreen">
-    
+        Title="PowerIDE" Name="WindowMain" Height="878.5" Width="1502" WindowStyle="None" AllowsTransparency="True" BorderThickness="5" Background="Transparent" WindowStartupLocation="CenterScreen">
+
     <Window.Resources>
-        
+
         <Style TargetType="Button" x:Key="TabButton">
             <Setter Property="Background" Value="#FECB41" />
             <Setter Property="TextBlock.TextAlignment" Value="Center" />
@@ -37,7 +37,7 @@
         <ControlTemplate x:Key="{x:Static MenuItem.TopLevelHeaderTemplateKey}" TargetType="{x:Type MenuItem}">
             <!--Стиль подменю-->
             <Grid>
-                <Border Height="{TemplateBinding Height}" Width="{TemplateBinding Width}" Name="Head" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="5" BorderThickness="{TemplateBinding BorderThickness}">
+                <Border Height="{TemplateBinding Height}" Width="{TemplateBinding Width}" Name="Head" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="17" BorderThickness="{TemplateBinding BorderThickness}">
                     <ContentPresenter ContentSource="Header" RecognizesAccessKey="True" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Border>
                 <Popup IsOpen="{TemplateBinding IsSubmenuOpen}" PopupAnimation="Fade">
@@ -51,10 +51,10 @@
                 <Trigger Property="IsHighlighted" Value="true">
                     <Setter TargetName="Head" Property="Background" Value="#242424"/>
                     <Setter TargetName="Head" Property="BorderBrush" Value="#242424"/>
-                    <Setter TargetName="Head" Property="BorderThickness" Value="1,1,1,1"/>
+                    <Setter TargetName="Head" Property="BorderThickness" Value="2"/>
                 </Trigger>
                 <Trigger Property="IsSubmenuOpen" Value="true">
-                    <Setter TargetName="Head" Property="CornerRadius" Value="5,5,0,0"/>
+                    <Setter TargetName="Head" Property="CornerRadius" Value="17,17,0,0"/>
                 </Trigger>
             </ControlTemplate.Triggers>
         </ControlTemplate>
@@ -75,7 +75,6 @@
 
         <Style TargetType="TabItem" x:Key="TabCode">
             <Setter Property="Template">
-
                 <Setter.Value>
                     <ControlTemplate TargetType="TabItem">
                         <Border BorderBrush="#707070" 
@@ -89,51 +88,54 @@
         </Style>
     </Window.Resources>
 
-
     <Border BorderThickness="3" BorderBrush="#707070" CornerRadius="10" Background="#373636" Padding="5">
         <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <Menu Height="40" Width="400" Margin="5,7,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Background="Transparent">
-                <MenuItem Header="File" Height="30" Width="79" Style="{StaticResource MenuItem}" Margin="5,0,0,0" Background="#515151" BorderBrush="#707070">
-                    <MenuItem Name="OpenButton" Header="Open" Click="OpenButton_Click"></MenuItem>
-                    <MenuItem Header="New" Name="NewProject" Click="NewProject_Click"></MenuItem>
-                    <MenuItem Header="Save" Name="SaveProject"></MenuItem>
-                    <MenuItem Header="Save as..." Name="SaveAsProject"></MenuItem>
-                    <MenuItem Header="Exit" Name="Exit" Click="Exit_Click"></MenuItem>
-                </MenuItem>
-                <MenuItem Header="Edit" Height="30" Width="79" Style="{StaticResource MenuItem}" Margin="5,0,0,0" Background="#515151" BorderBrush="#707070">
-                    <MenuItem Header="New"></MenuItem>
-                    <MenuItem Header="Save"></MenuItem>
-                    <MenuItem Header="Save as..."></MenuItem>
-                    <MenuItem Header="Exit"></MenuItem>
-                </MenuItem>
-                <MenuItem Header="View" Height="30" Width="79" Style="{StaticResource MenuItem}" Margin="5,0,0,0" Background="#515151" BorderBrush="#707070">
-                    <MenuItem Header="New"></MenuItem>
-                    <MenuItem Header="Save"></MenuItem>
-                    <MenuItem Header="Save as..."></MenuItem>
-                    <MenuItem Header="Exit"></MenuItem>
-                </MenuItem>
-                <MenuItem Header="About" Height="30" Width="79" Style="{StaticResource MenuItem}" Margin="5,0,0,0" Background="#515151" BorderBrush="#707070">
-                    <MenuItem Header="New"></MenuItem>
-                    <MenuItem Header="Save"></MenuItem>
-                    <MenuItem Header="Save as..."></MenuItem>
-                    <MenuItem Header="Exit"></MenuItem>
-                </MenuItem>
-            </Menu>
-            <Label Width="150" Content="PowerShell IDE Free" Foreground="White" Margin="664,5"/>
-            <Border Background="#515151" Height="136" BorderBrush="#707070" CornerRadius="10" BorderThickness="5" Margin="8,52,8,0" VerticalAlignment="Top">
+            <Border Name="TopBorder" MouseDown="Top_MouseDown" MouseMove="Top_MouseMove" MouseUp="Top_MouseUp">
+                <Grid>
+                    <Menu Height="40" Width="400" Margin="5,7,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Background="Transparent">
+                        <MenuItem Header="File" Height="30" Width="79" Style="{StaticResource MenuItem}" Margin="5,0,0,0" Background="#515151" BorderBrush="#707070" BorderThickness="2">
+                            <MenuItem Name="OpenButton" Header="Open" Click="OpenButton_Click"></MenuItem>
+                            <MenuItem Header="New" Name="NewProject" Click="NewProject_Click"></MenuItem>
+                            <MenuItem Header="Save" Name="SaveProject"></MenuItem>
+                            <MenuItem Header="Save as..." Name="SaveAsProject"></MenuItem>
+                            <MenuItem Header="Exit" Name="Exit" Click="Exit_Click"></MenuItem>
+                        </MenuItem>
+                        <MenuItem Header="Edit" Height="30" Width="79" Style="{StaticResource MenuItem}" Margin="5,0,0,0" Background="#515151" BorderBrush="#707070" BorderThickness="2">
+                            <MenuItem Header="Do"></MenuItem>
+                            <MenuItem Header="Undo"></MenuItem>
+                            <MenuItem Header="Find"></MenuItem>
+                            <MenuItem Header="Settings"></MenuItem>
+                        </MenuItem>
+                        <MenuItem Header="Debug" Height="30" Width="79" Style="{StaticResource MenuItem}" Margin="5,0,0,0" Background="#515151" BorderBrush="#707070" BorderThickness="2">
+                            <MenuItem Header="Run"></MenuItem>
+                        </MenuItem>
+                        <MenuItem Header="About" Height="30" Width="79" Style="{StaticResource MenuItem}" Margin="5,0,0,0" Background="#515151" BorderBrush="#707070" BorderThickness="2">
+                            <MenuItem Header="Site"></MenuItem>
+                            <MenuItem Header="Check updates"></MenuItem>
+                            <MenuItem Header="About PowerIDE"></MenuItem>
+                        </MenuItem>
+                    </Menu>
+                    <Label Width="75" Content="PowerIDE" Foreground="White"  FontSize="16" Margin="700,5,700,0" Height="38" VerticalAlignment="Top"/>
+                    <Border Width="176" CornerRadius="17" Background="#707070" Margin="0,5,7,0" RenderTransformOrigin="0.502,0.491" HorizontalAlignment="Right" Height="38" VerticalAlignment="Top">
+                        <Grid>
+                            <Button Width="53" Height="29" Style="{StaticResource TabButton}" Margin="5,4,118,5" Click="Button_Minimize" VerticalAlignment="Center" HorizontalAlignment="Center" Background="Green"/>
+                            <Button Width="53" Height="29" Style="{StaticResource TabButton}" Margin="62,4,61,5" Click="Button_Maximize" VerticalAlignment="Center" HorizontalAlignment="Center" Background="Orange"/>
+                            <Button Width="53" Height="29" Style="{StaticResource TabButton}" Margin="118,4,5,5" Click="Button_Click" VerticalAlignment="Center" HorizontalAlignment="Center" Background="Red"/>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Border>
+            <Border Name="MainBorder" Background="#515151" Height="136" BorderBrush="#707070" CornerRadius="10" BorderThickness="5" Margin="8,52,8,0" VerticalAlignment="Top">
                 <Grid>
 
                 </Grid>
             </Border>
-            <Border Background="#515151" BorderBrush="#707070" CornerRadius="10" BorderThickness="5" Height="auto" Margin="0,198,10,43" HorizontalAlignment="Right" Width="300">
+            <Border Name="RightBorder" Background="#515151" BorderBrush="#707070" CornerRadius="10" BorderThickness="5" Height="auto" Margin="0,198,10,43" HorizontalAlignment="Right" Width="300">
                 <Grid>
 
                 </Grid>
             </Border>
-            <Border Background="Transparent" Margin="320,198,320,44">
+            <Border Name="CenterBorder" Background="Transparent" Margin="320,198,320,44">
                 <Grid>
                     <TabControl x:Name="TabControl" Height="auto" Width="auto" Background="#515151" BorderBrush="#707070" BorderThickness="2">
                         <TabControl.Resources>
@@ -161,7 +163,6 @@
                                 </Setter>
                             </Style>
                         </TabControl.Resources>
-                        
                         <TabItem Name="FileName" Header="Test" BorderThickness="3" Height="28" VerticalAlignment="Bottom">
                             <TabControl TabStripPlacement="Left" Background="#515151" BorderBrush="#707070" BorderThickness="2">
                                 <TabControl.Resources>
@@ -203,20 +204,12 @@
                     </TabControl>
                 </Grid>
             </Border>
-            <Border Width="176" CornerRadius="17" Background="#707070" Margin="0,7,8,0" RenderTransformOrigin="0.502,0.491" HorizontalAlignment="Right" Height="38" VerticalAlignment="Top">
-                <Grid>
-                    <Button Width="53" Height="29" Style="{StaticResource TabButton}" Margin="5,4,118,5" Click="Button_Minimize" VerticalAlignment="Center" HorizontalAlignment="Center" Background="Green"/>
-                    <Button Width="53" Height="29" Style="{StaticResource TabButton}" Margin="62,4,61,5" Click="Button_Maximize" VerticalAlignment="Center" HorizontalAlignment="Center" Background="Orange"/>
-                    <Button Width="53" Height="29" Style="{StaticResource TabButton}" Margin="118,4,5,5" Click="Button_Click" VerticalAlignment="Center" HorizontalAlignment="Center" Background="Red"/>
-                </Grid>
-            </Border>
-            <Border/>
-            <Border Background="#515151" BorderBrush="#707070" CornerRadius="10" BorderThickness="5" Height="auto" Width="300" Margin="8,198,0,43" HorizontalAlignment="Left">
+            <Border Name="LeftBorder" Background="#515151" BorderBrush="#707070" CornerRadius="10" BorderThickness="5" Height="auto" Width="300" Margin="8,198,0,43" HorizontalAlignment="Left">
                 <Grid>
 
                 </Grid>
             </Border>
-            <Border Width="auto" Height="34" VerticalAlignment="Bottom" BorderBrush="#707070" CornerRadius="10" Background="#515151" BorderThickness="3" Margin="8,0,10,0" >
+            <Border Name="BottomBorder" Width="auto" Height="34" VerticalAlignment="Bottom" BorderBrush="#707070" CornerRadius="10" Background="#515151" BorderThickness="3" Margin="8,0,10,0" >
                 <Grid>
                     <Label Content="Status:" Margin="0,1,120,1" HorizontalAlignment="Right" Width="44" Foreground="White"/>
                     <Label Content="IDLE" Margin="0,1,64,1" HorizontalAlignment="Right" Width="33" Foreground="White"/>
@@ -224,5 +217,4 @@
             </Border>
         </Grid>
     </Border>
-
 </Window>
