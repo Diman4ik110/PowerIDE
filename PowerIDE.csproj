@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{8E090DF0-DFB2-47B7-BFBD-3434820552CD}</ProjectGuid>
+    <ProjectGuid>{99034189-8ED4-4C3C-8A3D-5F744F0BE5F4}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>PowerShell_Studio_Free</RootNamespace>
     <AssemblyName>PowerShell Studio Free</AssemblyName>
