@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PowerShell_Studio_Free"
         xmlns:avalonedit="http://icsharpcode.net/sharpdevelop/avalonedit"
         mc:Ignorable="d"
-        Title="PowerIDE" Name="WindowMain" Height="878.5" Width="1502" WindowStyle="None" AllowsTransparency="True" BorderThickness="5" Background="Transparent" WindowStartupLocation="CenterScreen">
+        Title="PowerIDE" StateChanged="WindowMain_StateChanged" Name="WindowMain" Height="878.5" Width="1502" WindowStyle="None" AllowsTransparency="True" BorderThickness="5" Background="Transparent" WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
 
@@ -88,43 +88,44 @@
         </Style>
     </Window.Resources>
 
-    <Border BorderThickness="3" BorderBrush="#707070" CornerRadius="10" Background="#373636" Padding="5">
+    <Border Name="WindowBorder" BorderThickness="3" BorderBrush="#707070" CornerRadius="10" Background="#373636" Padding="5">
         <Grid>
-            <Border Name="TopBorder" MouseDown="Top_MouseDown" MouseMove="Top_MouseMove" MouseUp="Top_MouseUp">
+            <Menu Height="40" Width="400" Margin="5,7,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Background="Transparent">
+                <MenuItem Header="File" Height="30" Width="79" Style="{StaticResource MenuItem}" Margin="5,0,0,0" Background="#515151" BorderBrush="#707070" BorderThickness="2">
+                    <MenuItem Name="OpenButton" Header="Open" Click="OpenButton_Click"></MenuItem>
+                    <MenuItem Header="New" Name="NewProject" Click="NewProject_Click"></MenuItem>
+                    <MenuItem Header="Save" Name="SaveProject"></MenuItem>
+                    <MenuItem Header="Save as..." Name="SaveAsProject"></MenuItem>
+                    <MenuItem Header="Exit" Name="Exit" Click="Exit_Click"></MenuItem>
+                </MenuItem>
+                <MenuItem Header="Edit" Height="30" Width="79" Style="{StaticResource MenuItem}" Margin="5,0,0,0" Background="#515151" BorderBrush="#707070" BorderThickness="2">
+                    <MenuItem Header="Do"></MenuItem>
+                    <MenuItem Header="Undo"></MenuItem>
+                    <MenuItem Header="Find"></MenuItem>
+                    <MenuItem Header="Settings"></MenuItem>
+                </MenuItem>
+                <MenuItem Header="Debug" Height="30" Width="79" Style="{StaticResource MenuItem}" Margin="5,0,0,0" Background="#515151" BorderBrush="#707070" BorderThickness="2">
+                    <MenuItem Header="Run"></MenuItem>
+                </MenuItem>
+                <MenuItem Header="About" Height="30" Width="79" Style="{StaticResource MenuItem}" Margin="5,0,0,0" Background="#515151" BorderBrush="#707070" BorderThickness="2">
+                    <MenuItem Header="Site"></MenuItem>
+                    <MenuItem Header="Check updates"></MenuItem>
+                    <MenuItem Header="About PowerIDE"></MenuItem>
+                </MenuItem>
+            </Menu>
+            <Border Panel.ZIndex="-10" MouseDown="Top_MouseDown" MouseMove="Top_MouseMove" MouseUp="Top_MouseUp" Margin="0" Height="52" Width="auto" Background="Transparent" VerticalAlignment="Top" HorizontalAlignment="Center">
                 <Grid>
-                    <Menu Height="40" Width="400" Margin="5,7,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Background="Transparent">
-                        <MenuItem Header="File" Height="30" Width="79" Style="{StaticResource MenuItem}" Margin="5,0,0,0" Background="#515151" BorderBrush="#707070" BorderThickness="2">
-                            <MenuItem Name="OpenButton" Header="Open" Click="OpenButton_Click"></MenuItem>
-                            <MenuItem Header="New" Name="NewProject" Click="NewProject_Click"></MenuItem>
-                            <MenuItem Header="Save" Name="SaveProject"></MenuItem>
-                            <MenuItem Header="Save as..." Name="SaveAsProject"></MenuItem>
-                            <MenuItem Header="Exit" Name="Exit" Click="Exit_Click"></MenuItem>
-                        </MenuItem>
-                        <MenuItem Header="Edit" Height="30" Width="79" Style="{StaticResource MenuItem}" Margin="5,0,0,0" Background="#515151" BorderBrush="#707070" BorderThickness="2">
-                            <MenuItem Header="Do"></MenuItem>
-                            <MenuItem Header="Undo"></MenuItem>
-                            <MenuItem Header="Find"></MenuItem>
-                            <MenuItem Header="Settings"></MenuItem>
-                        </MenuItem>
-                        <MenuItem Header="Debug" Height="30" Width="79" Style="{StaticResource MenuItem}" Margin="5,0,0,0" Background="#515151" BorderBrush="#707070" BorderThickness="2">
-                            <MenuItem Header="Run"></MenuItem>
-                        </MenuItem>
-                        <MenuItem Header="About" Height="30" Width="79" Style="{StaticResource MenuItem}" Margin="5,0,0,0" Background="#515151" BorderBrush="#707070" BorderThickness="2">
-                            <MenuItem Header="Site"></MenuItem>
-                            <MenuItem Header="Check updates"></MenuItem>
-                            <MenuItem Header="About PowerIDE"></MenuItem>
-                        </MenuItem>
-                    </Menu>
                     <Label Width="75" Content="PowerIDE" Foreground="White"  FontSize="16" Margin="700,5,700,0" Height="38" VerticalAlignment="Top"/>
-                    <Border Width="176" CornerRadius="17" Background="#707070" Margin="0,5,7,0" RenderTransformOrigin="0.502,0.491" HorizontalAlignment="Right" Height="38" VerticalAlignment="Top">
-                        <Grid>
-                            <Button Width="53" Height="29" Style="{StaticResource TabButton}" Margin="5,4,118,5" Click="Button_Minimize" VerticalAlignment="Center" HorizontalAlignment="Center" Background="Green"/>
-                            <Button Width="53" Height="29" Style="{StaticResource TabButton}" Margin="62,4,61,5" Click="Button_Maximize" VerticalAlignment="Center" HorizontalAlignment="Center" Background="Orange"/>
-                            <Button Width="53" Height="29" Style="{StaticResource TabButton}" Margin="118,4,5,5" Click="Button_Click" VerticalAlignment="Center" HorizontalAlignment="Center" Background="Red"/>
-                        </Grid>
-                    </Border>
                 </Grid>
             </Border>
+            <Border Width="176" CornerRadius="17" Background="#707070" Margin="0,5,7,0" RenderTransformOrigin="0.502,0.491" HorizontalAlignment="Right" Height="38" VerticalAlignment="Top">
+                <Grid>
+                    <Button Width="53" Height="29" Style="{StaticResource TabButton}" Margin="5,4,118,5" Click="Button_Minimize" VerticalAlignment="Center" HorizontalAlignment="Center" Background="Green"/>
+                    <Button Width="53" Height="29" Style="{StaticResource TabButton}" Margin="62,4,61,5" Click="Button_Maximize" VerticalAlignment="Center" HorizontalAlignment="Center" Background="Orange"/>
+                    <Button Width="53" Height="29" Style="{StaticResource TabButton}" Margin="118,4,5,5" Click="Button_Click" VerticalAlignment="Center" HorizontalAlignment="Center" Background="Red"/>
+                </Grid>
+            </Border>
+
             <Border Name="MainBorder" Background="#515151" Height="136" BorderBrush="#707070" CornerRadius="10" BorderThickness="5" Margin="8,52,8,0" VerticalAlignment="Top">
                 <Grid>
 

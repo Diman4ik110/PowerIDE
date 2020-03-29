@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PowerShell_Studio_Free"
         mc:Ignorable="d"
-        Title="New Project Windows" Height="250" Width="500" AllowsTransparency="True" WindowStyle="None" Background="Transparent" WindowStartupLocation="CenterScreen">
+        Title="New Project Window" Name="NewProjectWind" Height="180" Width="500" AllowsTransparency="True" WindowStyle="None" Background="Transparent" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Style TargetType="Button" x:Key="CreateButton">
             <Setter Property="TextBlock.TextAlignment" Value="Center" />
@@ -33,15 +33,15 @@
             </Setter>
         </Style>
     </Window.Resources>
-    <Border Width="auto" Height="auto" BorderThickness="3" BorderBrush="#707070" CornerRadius="10" Background="#373636">
+    <Border Panel.ZIndex="0" Name="NewProjectBorder" Width="auto" Height="auto" BorderThickness="3" BorderBrush="#707070" CornerRadius="10" Background="#373636" MouseDown="NewProjectBorder_MouseDown" MouseMove="NewProjectBorder_MouseMove" MouseUp="NewProjectBorder_MouseUp">
         <Grid>
-            <Label HorizontalAlignment="Center" VerticalAlignment="Top" Content="New Project" Foreground="White"></Label>
+            <Label HorizontalAlignment="Center" VerticalAlignment="Top" Content="New Project" Foreground="White" Margin="210,0"></Label>
             <Label Content="Project Name" Margin="84,50,323,0" VerticalAlignment="Top" Foreground="White"/>
-            <TextBox Height="20" Margin="240,58,72,0" VerticalAlignment="Top" />
-            <Label Content=" Project Path" Margin="84,80,323,0" VerticalAlignment="Top" Foreground="White"/>
-            <TextBox Name="ProjectPath" Height="20" Margin="240,86,98,0" IsReadOnly="True" VerticalAlignment="Top"/>
-            <Button Content="Create" HorizontalAlignment="Right" Margin="0,201,44,19" Width="83" Style="{StaticResource CreateButton}" Background="#515151" BorderThickness="1" BorderBrush="#707070" Foreground="White"/>
-            <Button Name="Path" Content="..." HorizontalAlignment="Left" Margin="401,86,0,0" VerticalAlignment="Top" Width="21" Click="Path_Click"/>
+            <TextBox Name="ProjectName" Height="23" Margin="210,56,113,0" VerticalAlignment="Top" Background="#373636" BorderBrush="#707070" BorderThickness="2" Foreground="White"/>
+            <Label Content=" Project Path" Margin="84,81,323,0" VerticalAlignment="Top" Foreground="White"/>
+            <TextBox Name="ProjectPath" Height="23" Margin="210,86,70,0" IsReadOnly="True" VerticalAlignment="Top" Background="#373636" BorderBrush="#707070" BorderThickness="2" Foreground="White"/>
+            <Button Name="Create" Content="Create" HorizontalAlignment="Right" Margin="0,0,44,9" Width="83" Style="{StaticResource CreateButton}" Background="#515151" BorderThickness="1" BorderBrush="#707070" Foreground="White" Height="24" VerticalAlignment="Bottom" Click="Create_Click"/>
+            <Button Name="Path" Content="..." HorizontalAlignment="Left" Margin="429,86,0,0" VerticalAlignment="Top" Width="23" Height="23" Click="Path_Click" Background="#707070"/>
             <Button Name="CloseButton" HorizontalAlignment="Left" Margin="470,10,0,0" VerticalAlignment="Top" Width="14" Height="14" Background="Red" Style="{StaticResource CloseButton}" Click="CloseButton_Click" />
         </Grid>
     </Border>

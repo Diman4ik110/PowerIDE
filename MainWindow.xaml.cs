@@ -27,6 +27,13 @@ namespace PowerShell_Studio_Free
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
     ///
+    public class ProjectSettings
+    {
+        private string ProjectPath { set; get; }
+        private string ProjectName { set; get; }
+        private string ProjectFormFile { set; get; }
+        private string ProjectScriptFile { set; get; }
+    }
     public partial class MainWindow : Window
     {
         private OpenFileDialog fileDialog = new OpenFileDialog();
@@ -162,11 +169,29 @@ namespace PowerShell_Studio_Free
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {
-                WindowMain.Top = WindowMain.Top + (position.X - e.GetPosition(this).X);
-                WindowMain.Left = WindowMain.Left + (position.Y - e.GetPosition(this).Y);
+                WindowMain.Top += (e.GetPosition(this).Y - position.Y);
+                WindowMain.Left += (e.GetPosition(this).X - position.X);
             }
         }
+
         private void Top_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void WindowMain_StateChanged(object sender, EventArgs e)
+        {
+            if (WindowMain.WindowState == WindowState.Maximized)
+            {
+                WindowBorder.CornerRadius = new CornerRadius(0);
+            }
+            else
+            {
+                WindowBorder.CornerRadius = new CornerRadius(10);
+            }
+            
+        }
+        public void LoadProject(string PathToFile)
         {
 
         }
