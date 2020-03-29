@@ -82,7 +82,7 @@ namespace PowerShell_Studio_Free
                     new XElement("ProjectFormFile", ProjectName.Text + ".xaml"),
                     new XElement("ProjectScriptFile", ProjectName.Text + ".ps1"))));
                 ProjectSettingFile.Save(ProjectPath.Text + @"\" + ProjectName.Text + @"\" + ProjectName.Text + ".psproject");
-
+                this.Close();
             }
         }
     }
